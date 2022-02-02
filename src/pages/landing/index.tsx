@@ -3,21 +3,22 @@ import { useEffect, useState } from "react"
 export const LandingPage = () => {
     const [isTyping, setIsTyping] = useState(true);
     const [textToType,setTextToType] = useState("");
-    let i:number = 0;
-    const textTyping = (textString: string) => {
-        if(i < textString.length) {
-            setTextToType((prevText)=>{return prevText + textString.charAt(i)});
-            i++;
-            const typingTimeout = setTimeout(()=>{
-                textTyping(textString);
-                clearTimeout(typingTimeout);
-            }, 200);
-        }
-        else{
-            setIsTyping(false);
-        }
-    }
+    
     useEffect(()=>{
+        let i:number = 0;
+        const textTyping = (textString: string) => {
+            if(i < textString.length) {
+                setTextToType((prevText)=>{return prevText + textString.charAt(i)});
+                i++;
+                const typingTimeout = setTimeout(()=>{
+                    textTyping(textString);
+                    clearTimeout(typingTimeout);
+                }, 200);
+            }
+            else{
+                setIsTyping(false);
+            }
+        }
         textTyping("hello there! 👋 \n I'm Nikhilesh.👨‍💻 \n Welcome to my space..🚀");
     },[]);
 
