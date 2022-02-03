@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import {ReactComponent as Quil} from "../../assets/svg/quil.svg";
 
 export const LandingPage = () => {
     const [isTyping, setIsTyping] = useState(true);
@@ -19,14 +20,16 @@ export const LandingPage = () => {
                 setIsTyping(false);
             }
         }
-        textTyping("hello there! 👋 \n I'm Nikhilesh.👨‍💻 \n Welcome to my space..🚀");
+        const initialTimeout = setTimeout(()=>textTyping("hello there! 👋 \n I'm Nikhilesh.👨‍💻 \n Welcome to my space..🚀"),1000)
+        return ()=>clearTimeout(initialTimeout);
     },[]);
 
     return (<>
         <div style={{display: "flex", background:"teal", flexDirection:"column", justifyContent:"left", alignItems: "center", width:"100vw", height:"100vh"}}>
-            <div style={{display: "block", fontWeight: "500", fontSize: "42px", whiteSpace: "pre-line", margin:"auto"}}>
+            <div style={{display: "block", fontWeight: "500", fontSize: "42px", whiteSpace: "pre-line", margin:"auto", lineHeight:1.5}}>
             {textToType}
-            <span className={`${isTyping ? "blink-text": "hidden"}`}>|</span>
+            {/* <span className={`${isTyping ? "blink-text": "hidden"}`}>|</span> */}
+                <Quil className={`${!isTyping && "hidden"}`} />
             </div>
         </div>
     </>)
